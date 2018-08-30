@@ -18,7 +18,7 @@ long long  reduce(long long  a,string b){
 long long  gcd(long long  a,long long  b){
     if(b==0){
         return a;
-    }else{
+            }else{
         gcd(b,a%b);
     }
 }
@@ -35,9 +35,6 @@ while(t--){
     cin >> a>>b1;
     b=reduce(a,b1);
     cout<<gcd(a,b)<<"\n";
-
-
-
 }
 return 0;
 }
