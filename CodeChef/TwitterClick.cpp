@@ -7,8 +7,7 @@
 #include <algorithm>
 
 using namespace std;
-int open_tweet(int a[]){
-    int n=sizeof(a)/sizeof(a[0]);
+int open_tweet(int a[],int n){
     int count=0;
     for(int i=0;i<n;i++){
         if(a[i]==1){
@@ -23,22 +22,24 @@ int main(){
     cin>>n>>m;
     int a[n]={0};
     while(m--){
-        string a;
-        cin>>a;
+        string aa;
+        cin>>aa;
         int p;
-        if(a==""){
-            cin>>p
-            if(a[p]==0){
-                a[p]++;
+        if(aa=="CLICK"){
+            cin>>p;
+            if(a[p-1]==0){
+                a[p-1]++;
             }else{
-                a[p]--;
+                a[p-1]--;
             }
+            cout << open_tweet(a,sizeof(a)/sizeof(a[0])) <<"\n";
         }else{
             for(int i=0;i<n;i++){
                 a[i]=0;
             }
+            cout << 0 <<"\n";
         }
-        cout << open_tweet(a) <<"\n";
+
     }
 
     return 0;
