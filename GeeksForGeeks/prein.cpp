@@ -6,47 +6,33 @@
 
 using namespace std;
 
-void func(int *pre,int *in,int il,int ir,int pl,int pr){
-
-	if(il>ir || pl>pr){
-
-		return;
-	}
-
-	int t=il;
-
-	for(;t<=ir;t++){
-		if(in[t]==pre[pl]){
-			break;
-		}
-	}
-
-	cout <<il << "-" <<ir << " | " << pl << "-" << pr << "|" << " " <<  pre[pl] << "\n";
-
-	func(pre,in,t+1,ir,pl+t-il+1,pr);
-	func(pre,in,il,t-1,pl+1,pl+t-il);
-
-}
-
-
-
 int main(){
 
 	int n;
 	cin >> n;
 
-	int pre[n],in[n];
+	string a;
+	cin >> a;
+
+	int dp[26]={0};
+
+	int ans = 0;
 
 	for(int i=0;i<n;i++){
-		cin >> in[i];
+		if(dp[a[i]-'a']==0){
+			dp[a[i]-'a']=i;
+		}else{
+			ans=max(ans,i-dp[a[i]-'a']);
+			dp[a[i]-'a']=i;
+		}
+		for(int j=0;j<26;j++){
+			cout <<dp[i] << " ";
+		}
+		cout << "\n";
 	}
 
-	for(int i=0;i<n;i++){
+	cout << ans << "\n";
 
-		cin >> pre[i];
-	}
 
-	func(pre,in,0,n-1,0,n-1);
 	return 0;
 }
-
