@@ -39,7 +39,9 @@ int main(){
 	int root;
 	cin >> root;
 	height = getParam(root);
-	cout << height << " " << size << "\n";
+//	cout << height << " " << size << "\n";
+	cout << "height : " << height << "\n";
+	cout << "size : " << size << "\n";
 	cout << "Density : " << ((float)size / height) << "\n";
 
 	return 0;
