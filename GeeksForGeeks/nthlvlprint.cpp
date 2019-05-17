@@ -12,9 +12,6 @@ void printlvl(int lvl,int n,int data){
 		cout << data << "\n";
 	}
 
-
-
-
 	printlvl(lvl+1,n,tree[data][1]);
 	printlvl(lvl+1,n,tree[data][0]);
 
