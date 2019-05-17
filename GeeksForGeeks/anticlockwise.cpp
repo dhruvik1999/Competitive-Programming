@@ -28,14 +28,12 @@ void printlvlrtol(int lvl,int n,int data){
 	if(data==-1)
 		return ;
 
-	//cout << data << "\n";
 	if(lvl==n-1 ){
 		cout << data << "\n";
 	}
 
 	printlvlrtol(lvl+1,n,tree[data][1]);
 	printlvlrtol(lvl+1,n,tree[data][0]);
-
 }
 
 int main(){
@@ -64,9 +62,8 @@ int main(){
 	int lvl;
 	cin >> lvl;
 
-//	cout << lvl << " " << root << "\n";
+	//	cout << lvl << " " << root << "\n";
 	//printlvlltor(0,lvl,root);
-
 	//cout << "\n" << getHeight(root) << "\n";
 
 	int height = getHeight(root);

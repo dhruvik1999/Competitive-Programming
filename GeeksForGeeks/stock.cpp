@@ -27,6 +27,5 @@ int main(){
 	cout << min_unt << " " << temp << "\n";
 	cout << "max profit " << ans << "\n"; 
 
-
 	return 0;
 }
