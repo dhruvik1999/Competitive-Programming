@@ -8,7 +8,7 @@ int main(){
 	int n;
 	cin >> n;
 
-	for(int i=1;i<=n;i++){
+	for(int i=1;i<=100;i++){
 		a[i][0]=-1;
 		a[i][1]=-1;
 	}
@@ -32,7 +32,7 @@ int main(){
 
 	stack<int> left,right;
 
-	left.push(root);
+	right.push(root);
 	int temp;
 	while(left.size()!=0 || right.size()!=0){
 		if(left.size()!=0){
