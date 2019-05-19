@@ -62,7 +62,7 @@ int main(){
 	int lvl;
 	cin >> lvl;
 
-	//	cout << lvl << " " << root << "\n";
+	//cout << lvl << " " << root << "\n";
 	//printlvlltor(0,lvl,root);
 	//cout << "\n" << getHeight(root) << "\n";
 
@@ -81,7 +81,5 @@ int main(){
 	if(height%2==1){
 		printlvlltor(0,height/2+1,root);
 	}
-
-
 	return 0;
 }
