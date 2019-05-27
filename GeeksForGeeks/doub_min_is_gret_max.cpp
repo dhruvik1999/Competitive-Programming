@@ -28,7 +28,7 @@ int findMin(int *a,int l,int r){
 		return 0;
 
 	if(dp[l][r]!=-1)
-		return dp[l][r];
+		return dp[l][r];q
 
 
 
