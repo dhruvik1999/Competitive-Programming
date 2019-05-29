@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+/*
 int arrange(int *a,int i,int j){
 
 	vector<int> l,r;
@@ -26,6 +27,49 @@ int arrange(int *a,int i,int j){
 
 	return i+l.size()-1;
 }
+*/
+
+int arrange(int *a,int i,int j){
+
+	int k = i;
+	int temp;
+	int piv = j;
+
+	for(int t=0;t<7;t++){
+		cout << a[t] << " ";
+	}
+	cout << "\n";
+
+
+	while(i<=j){
+		if(a[i] < a[piv]){
+			temp = a[i];
+			a[i] = a[k];
+			a[k] = temp;
+			k++; 
+		}
+			i++;
+		
+	}
+
+
+
+	temp = a[k];
+	a[k] = a[piv];
+	a[piv] = temp;
+
+	
+	for(int t=0;t<7;t++){
+		cout << a[t] << " ";
+	}
+	cout << "\n\n";
+
+
+
+
+	return k;
+}
+
 
 void getPivot(int *a,int n,int i,int j){
 	if(j-i<=1)
