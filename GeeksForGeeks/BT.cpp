@@ -36,6 +36,9 @@ int main(){
 	root->left->left=newNode(8);
 	root->left->right=newNode(12);
 
+	inOrd(root);
+	cout << "\n";
+
 
 
 	return 0;
