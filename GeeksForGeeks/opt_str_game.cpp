@@ -7,7 +7,6 @@ int findAns(int *a,int l,int r){
 	if(l>r)
 		return 0;
 
-
 	return max(  a[l] + min( findAns(a,l+2,r) , findAns(a,l+1,r-1) ) , a[r] + min( findAns(a,l,r-2) , findAns(a,l+1,r-1) ) );
 }
 
