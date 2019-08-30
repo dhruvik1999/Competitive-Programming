@@ -2,7 +2,7 @@
 using namespace std;
 
 
-vector< int > a[1000];
+vector< int > a[1000	];
 vector< vector< int > > ans;
 
 int numberOfLeaf(int node){
