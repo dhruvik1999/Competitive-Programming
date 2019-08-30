@@ -32,25 +32,35 @@ int main(){
 	for(int i=0;i<n;i++){
 		//cout << a[i].second.first << "\n";
 		dp[i] = a[i].second.second;
+
+		//cout << dp[i] << "\n";
 	}
 
 	for(int i=n-2;i>=0;i--){
+			double tt = 0;
+
 		for(int j=i+1;j<n;j++){
 			if( dis( a[j].first.first , a[j].first.second , a[i].first.first , a[i].first.second  )  <= a[j].second.first - a[i].second.first){
-				dp[i]+=dp[j];
+				if(tt<dp[j]){
+					tt=dp[j];
+				}
 			}
 		}
+			dp[i]+=tt;
+
 	}
 
 
 
 	double ans = 0;
 
-	for(int i=0;i<n;i++){
-		if(dp[i]>ans){
-			ans = dp[i];
-		}
-	}
+	 for(int i=0;i<n;i++){
+	 	if(dp[i]>ans){
+	 		ans = dp[i];
+	 	}
+	 	//cout << dp[i] << " ";
+	 }
+	 //cout << "\n";
 
 	printf("%0.9f\n",ans);
 
