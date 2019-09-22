@@ -1,54 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main(){
-
-	int n;
+int  main(){
+	long long  n;
 	cin >> n;
 
-	vector< vector<int> > a(n, vector<int>(n,0));
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			cin >> a[i][j];
+	vector< vector<long long > > a(n , vector<long long >(n,0));
+	for(long long  i=0;i<n;i++){
+		for(long long  j=0;j<n;j++){
+		cin >> a[i][j];
+
 		}
 	}
 
-	double mulall = 1;
-	vector<int> ans(n);
-	if(n%2==1){
-		for(int i=0;i<n;i++){
-			for(int j=i+1;j<n;j++){
-				mulall = mulall * pow(a[i][j],0.25);
-			}
-		}
+	double numnul = 1;
+	numnul = a[0][1];
+	numnul*=a[0][2];
+	numnul*=a[1][2];
+	numnul = sqrt(numnul);
+	long long  fa = numnul/a[1][2];
 
-		ans[0] = ceil(mulall);
-
-		for(int i=1;i<n;i+=2){
-			ans[0] = ans[0]/a[i][i+1];
-		}
-
-	}else{
-		for(int i=0;i<n;i++){
-			for(int j=i+1;j<n-1;j++){
-				mulall = mulall * pow(a[i][j],0.25);
-			}
-		}
-
-		ans[0] = ceil(mulall);
-
-		cout << ans[0] << "\n";
-
-		for(int i=1;i<n-1;i+=2){
-			ans[0] = ans[0]/a[i][i+1];
-		}
+	cout << fa << " ";
+	for(long long  i=1;i<n;i++){
+		cout << a[0][i]/fa << " ";
 	}
-
-	cout << ans[0] << "\n";
-
-
-	
-
+	cout << "\n";
 
 
 
