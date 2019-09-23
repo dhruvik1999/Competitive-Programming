@@ -1,36 +1,43 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+vector< vector<int> > dp(301 , vector<int>(301,-1));
+vector<char> ans;
+	
+int doWork(string s,string t,int x,int y){
+	if(x<0 || y<0)
+		return 0;
+
+	if(dp[x][y]!=-1)
+		return dp[x][y];
+
+	if(s[x]==t[y]){
+		return (dp[x][y] = 1+doWork(s,t,x-1,y-1));
+	}
+
+	return (dp[x][y] = max(  doWork(s,t,x-1,y) , max ( doWork(s,t,x,y-1), doWork(s,t,x-1,y-1) )));
+}
+
+
 int main(){
 
-	long long  n,w;
-	cin >> n >> w;
-
-	vector<long long > a(n),b(n);
-	vector< pair< double , pair<int,int> > > dp;
+	string s,t;
+	cin >> s >> t;
 
 
-	for(long long  i=0;i<n;i++){
-		cin >> a[i] >> b[i];
-		dp.push_back( make_pair( ((double)a[i])/b[i] , make_pair( a[i] , b[i] )  ) );
+	cout << "ANS : " << doWork(s,t,s.length()-1,t.length()-1) << "\n";
+	
+	for(int i=0;i<t.length();i++)
+		cout << t[i] << " ";
+	cout << "\n";
+	for(int i=0;i<s.length();i++){
+
+		cout << s[i] << " ";
+		for(int j=0;j<t.length();j++){
+			cout << dp[i][j] << " ";
+		}
+		cout << "\n";
 	}
-
-	sort(dp.begin(),dp.end());
-
-	for(int i=0;i<n;i++){
-		cout << dp[i].first << " " << dp[i].second.first << " " << dp[i].second.second << "\n";
-	}
-
-	long long ans = 0,tw=0;
-	int i=0;
-	while(tw<=w && i<n){
-		ans+=dp[i].second.second;
-		tw+=dp[i].second.first;
-		i++;
-	}
-
-	cout << ans << "\n";
-
 
 
 	return 0;
