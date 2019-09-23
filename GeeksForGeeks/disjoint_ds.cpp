@@ -6,7 +6,7 @@ vector<int> dp(1000000,-1);
 
 int getRoot(int i){
 	if(i!=dp[i]){
-		dp[i] = getRoot(dp[i]);
+		dp[i] = getRoot(dp[i]);	
 	}
 	return dp[i];
 }
