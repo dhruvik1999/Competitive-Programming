@@ -34,7 +34,7 @@ int main(){
 
 	int diff = abs(sl-sr);
 
-	//cout << qr <<  " " << ql << "\n";
+	//	cout << qr <<  " " << ql << "\n";
 
 	if(qr!=0){
 		if(sr>sl){
