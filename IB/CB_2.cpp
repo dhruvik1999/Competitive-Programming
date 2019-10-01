@@ -51,7 +51,6 @@ int  main(){
 		ans = ( ans%mod + doWork(i,n,g)%mod)%mod;
 	}
 
-	cout << ans << "\n";
 
 
 
