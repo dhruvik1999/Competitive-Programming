@@ -1,50 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+#define mod 1000000007
+
+
 int main(){
-ios_base::sync_with_stdio(false);
+
+	ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-	string s;
+    #ifndef ONLINE_JUDGE
+    freopen("ip.txt", "r", stdin);
+    freopen("op.txt", "w", stdout);
+	#endif
 
-	cin >> s;
-	s=" "+s;
+    string a;
+    cin >> a;
+
+    set<int> s[30];
+    int n;
+    cin >> n;
+
+    for(int i=0;i<a.length();i++){
+    	s[ a[i]-'a'  ].insert(i+1);
+    }
+    a=" "+a;
+
+    while(n--){
+    	int p;
+    	cin >> p;
+
+    	if(p==1){
+    		int pos;
+    		char r;
+    		cin >> pos >> r;
+    		s[ a[pos]-'a' ].erase( pos );
+    		s[ r-'a' ].insert(pos);
+    		a[pos]=r;
+    		//cout<< a << "\n";
+    	}else{
+    		int l,r;
+    		cin >> l >> r;
+    		int ans = 0;
+
+    		for(int i=0;i<26;i++){
+    			if( s[i].upper_bound( l-1 ) != s[i].upper_bound( r ) ){
+    				ans++;
+    			}
+    		}
+    		cout << ans << "\n";
+    	}
 
 
-	int n;
-	cin >> n;
 
-	set<int> dp[30];
-
-	for(int i=1;i<s.length();i++){
-		dp[ s[i]-'a' ].insert(i);
-	}
+    }
 
 
-	int p,q;
-	for(int i=0;i<n;i++){
-		cin >> p >> q;
 
-		if(p==1){
-			char r;
-			cin >> r;
-			dp[ s[q]-'a' ].erase( dp[s[q]-'a'].find(q) );
-			dp[ r-'a' ].insert(q);
-			s[q]=r;
-			//cout << s << "\n";
-		}else{
-			int r;
-			cin >> r;
-			int ans = 0;
-			for(int j=0;j<26;j++){
-				if( upper_bound( dp[j].begin() , dp[j].end() , q-1 ) != upper_bound( dp[j].begin() , dp[j].end() , r ) ){
-					ans++;
-				}
-			}
-
-			cout << ans << "\n";
-
-		}
-	}
-
-	return 0;
 }
