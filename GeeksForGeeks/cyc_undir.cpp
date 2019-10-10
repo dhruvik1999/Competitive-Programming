@@ -6,7 +6,7 @@ bool hasCycle( int node, int par , vector<int> *graph , vector<bool> &vis ){
 
 	if( vis[node]==true ){
 		for(int i=0;i<seq.size();i++){
-			cout << seq[i] << " ";
+				cout << seq[i] << " ";
 		}
 		cout << "\n";
 
