@@ -8,7 +8,6 @@ void doWork( vector<int> *graph, int node, vector<int> &val, int root ){
 	cout << node << "\n";
 	dp[node]=val[node];
 	if( graph[node].size()==1 && node!=root){
-		dp[node]=val[node];
 		return ; 
 	}
 
