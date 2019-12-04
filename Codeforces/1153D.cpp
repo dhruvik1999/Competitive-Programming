@@ -1,62 +1,47 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int doWork( vector<int> *v, vector<int> &op , vector<bool> &vis , int node){
-
+int doWork(vector<int> *graph , int node , vector<int> &op , vector<bool> &vis, int lv){
 	vis[node]=true;
 
-	if( v[node].size()==1 && node!=1){
-		return node;
+	if( graph[node].size()==1 && node!=1 ){
+		return lv;
 	}
-
-	int t;
 
 	if( op[node]==1 ){
-		cout << "+" << "\n";
-		t = INT_MIN;
-		for(int i=0;i<v[node].size();i++){
-			if( vis[ v[node][i] ]==false ){
-				t = max( t , doWork(v,op,vis,v[node][i]) );
-			}
-		}
+
 	}else{
-		cout << "-" << "\n";
 
-		t = INT_MAX;
-		for(int i=0;i<v[node].size();i++){
-			if( vis[ v[node][i] ]==false ){
-				t = min( t , doWork(v,op,vis,v[node][i]) );
-			}
-		}
 	}
-
-	return t;
 
 }
 
 
 int main(){
 
+
 	int n;
 	cin >> n;
 
-	vector<int> op(n+1);
-	for(int i=1;i<=n;i++){
-		cin >> op[i];
+	vector<int> op(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i];
 	}
 
-	vector<int> g[n+1];
-
+	vector< int > graph[n+1];
 	int t;
 	for(int i=2;i<=n;i++){
 		cin >> t;
-		g[i].push_back(t);
-		g[t].push_back(i);
+		graph[t].push_back(i);
+		graph[i].push_back(t);
 	}
 
-	vector<bool> vis(n+10,false);
-	cout << doWork(g,op,vis,1) << "\n";
-
+	int lv = 0;
+	for(int i=2;i<=n;i++){
+		if( graph[i].size()==1 ){
+			lv++;
+		}
+	}
 
 
 
