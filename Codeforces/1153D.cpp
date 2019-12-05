@@ -9,7 +9,7 @@ int doWork(vector<int> *graph , int node , vector<int> &op , vector<bool> &vis, 
 	}
 
 	if( op[node]==1 ){
-
+		
 	}else{
 
 	}
