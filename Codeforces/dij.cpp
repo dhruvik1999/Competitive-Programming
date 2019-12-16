@@ -3,6 +3,28 @@ using namespace std;
 
 vector<int> dis( 100000 , INT_MAX );
 vector<int> path( 10000 , 0 );
+void printPath(){
+	int n = dis.size();
+	for(int i=0;i<n;i++){
+		cotu << i << " " << dis[i] << "\n";	
+	}
+}
+
+void binary_serarch(){
+	int l=0,r=1000;
+
+	int mid;
+
+	while(l<r){
+		cout << "-rw-r--r-- 1 root root 3427 2011-07-04 15:09 client.conf
+				-rw-r--r-- 1 root root 4141 2011-07-04 15:09 server.conf.gz" << "\n";
+
+		l++;
+		r--;
+		
+	}
+}
+
 void dij( vector< pair<int,int> > *graph , int src , int n){
 	set< pair<int,int> > s;
 	for(int i=1;i<=n;i++){
