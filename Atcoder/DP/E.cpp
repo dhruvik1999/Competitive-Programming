@@ -1,35 +1,82 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-//vector< vector<long long> > dp(101 , vector<long long>(100001,-1));
+#define int long long
 
-map< pair<int,int> , long long > dp;
+#define MOD 1000000007
+#define maxlen 1000005
 
-long long  doWork(vector<long long > &a,vector<long long > &b,long long  i,long long  w){
-	if(w<=0 || i>a.size())
-		return 0;
+int gcd(int a,int b){if(b==0)return a;return gcd(b,a%b);}
+vector<int> primeFact(int n){vector<int> ans;for(int t=2;t<=sqrt(n);t++){if(n%t==0){ans.push_back(t);while(n%t==0){n=n/t;}}}if(n>2)ans.push_back(n);return ans;}
+vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){if( i*i == n ){ans.push_back(i);}else{ans.push_back(i);ans.push_back(n/i);}}}return ans;}
+int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
+void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
-	if(dp.find(make_pair(i,w))!=dp.end())
-		return dp[make_pair(i,w)];
+vector< vector<int> > dp(101 , vector<int> (100001 , INT_MAX ));
 
-	if(w<a[i])
-		return (dp[make_pair(i,w)] = doWork(a,b,i+1,w));
+int doWork( vector<int> &val, vector<int> &wi, int n, int w, int valLim ){
 
-	return (dp[make_pair(i,w)] = max( doWork(a,b,i+1,w) , doWork(a,b,i+1,w-a[i])+b[i] ));
-}
-
-int  main(){
-
-	long long  n,w;
-	cin >> n >> w;
-
-	vector<long long > a(n),b(n);
-
-	for(long long  i=0;i<n;i++){
-		cin >> a[i] >> b[i];
+	for(int i=0;i<=100;i++){
+		dp[i][0]=0;
 	}
 
-	cout << doWork(a,b,0,w) << "\n";
+
+	for(int i=1;i<=n;i++){
+		for(int j=0;j<=100000;j++){
+			//cout << i << " " << j  <<"\n";
+			if(val[i-1] > j){
+				dp[i][j] = dp[i-1][j];
+			}else{
+				//cout << dp[i-1][j-val[i-1]] + wi[i-1] << "\n";
+				dp[i][j] = min( dp[i-1][j-val[i-1]] + wi[i-1] , dp[i-1][j] );
+			}
+
+		}
+	}
+	int ans = 0;
+	for(int i=0;i<=n;i++){
+		for(int j=0;j<=100000;j++){
+			//if( dp[i][j] < INT_MAX )
+			//cout << dp[i][j] << " ";
+			if( dp[i][j] <= w ){
+				ans= max( ans , j );
+			}
+		}
+		//cout << "\n";
+	}
+
+	return ans;
+
+}
+
+
+int32_t main(){
+	//fastio();
+		
+
+
+	int n,w;
+	cin >> n >> w;
+
+	vector< int > val(n),wi(n);
+	int valLim = 0;
+
+	for(int i=0;i<n;i++){
+		cin >> wi[i]  >> val[i];
+		valLim = max( valLim , val[i] );
+	}
+
+	//cout << valLim << "\n";
+
+	cout << doWork(val,wi,n,w,valLim) << "\n";
+
+
+
+
 
 	return 0;
 }
+
+
+
+
