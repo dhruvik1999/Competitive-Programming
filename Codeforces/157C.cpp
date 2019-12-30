@@ -12,9 +12,41 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
+int doWork( string s, string t, int n, int m ){
+	int ans = 0;
+
+	for(int i=0;i<n;i++){
+		int tt = 0;
+		for(int j=0;i+j<n && j<m;j++){
+			if( s[i+j] == t[j]  ){
+				tt++;
+			}
+		}
+		ans = max( ans , tt );
+	}
+
+	return ans;
+}
+
+
+
+
 int32_t main(){
 	fastio();
 
+	string s,t="";
+	cin >> s >> t;
+
+	int n = s.length(), m=t.length();
+
+	int ans = 0;
+
+	//if( n>=m ){
+		ans = max(doWork( s,t,n,m ) , doWork( t,s,m,n ));
+	// }else{
+	// 	ans = doWork( t,s,m,n );
+	// }
+	cout << m-ans << "\n";
 
 
 

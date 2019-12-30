@@ -15,7 +15,37 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
+	int n,m;
+	cin >> n >> m;
 
+	vector<int> graph[n+1];
+
+	int p,q;
+	for(int i=0;i<m;i++){
+		cin >> p >> q;
+		graph[p].push_back(q);
+	}
+
+	vector< vector<int> > dp(n+1 , vector<int>(n+1 , 0));
+
+	for(int i=1;i<=n;i++){
+		for(int j=0;j<graph[i].size();j++){
+			for(int k=0;k<graph[graph[i][j]].size();k++){
+				dp[i][graph[graph[i][j]][k]]++;
+			}
+		}
+	}
+
+	int ans =  0;
+
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			if( dp[i][j]>=2 && i!=j ){
+				ans += (dp[i][j]*(dp[i][j]-1))/2;
+			}
+		}
+	}
+	cout << ans << "\n";
 
 
 	return 0;

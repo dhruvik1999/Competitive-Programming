@@ -15,9 +15,18 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
+	int n,a,b;
+	int ans;
 
+	cin >> n >> a >> b;
 
-
+	if(abs(a-b)%2==0){
+		ans = abs(a-b)/2;
+	}else{
+		//cout << a-1 << " " << b-1 << " " << n-a << " " << n-b << "\n";
+		ans = min( min( a-1LL ,b-1LL)+1+(abs(b-a)-1)/2 , min(n-a ,n-b)+1+(abs(b-a)-1)/2 );
+	}
+	cout << ans << "\n";
 	return 0;
 }
 
