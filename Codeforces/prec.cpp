@@ -1,41 +1,45 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-int main(){
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
 
-	
+int main()
+{
+    int n;
+    cin >> n;
 
-	int n;
-	cin >> n;
+    vector< vector<int> > a(n , vector<int>(n));
+    for(int i=0;i<n;i++){
+    	for(int j=0;j<n;j++){
+    		cin >> a[i][j];
+    	}
+    }
 
-	vector<int> a(n);
-	for(int i=0;i<n;i++){
-		cin >> a[i];
-	}
+    int ans = 0;
+        for(int i=2;i<=10;i++){
+            for(int j=0;j<i;j++){
+            	int lock = false;
+                for(int k=0;k<i;k++){
+                    if( a[j][k]==0 ){
+                    	lock = true;
+                    	break;
+                    }
+                }
+                if(lock)
+                	break;
+            }
+        }
+        
 
-	int lsum=0,gsum=0;
-	int l=-1,r=-1,ll =-1;
-	for(int i=0;i<n;i++){
+    // Write an action using cout. DON'T FORGET THE "<< endl"
+    // To debug: cerr << "Debug messages..." << endl;
 
-		if( lsum+a[i] <= a[i] ){
-			ll = i;
-			lsum=a[i];
-		}else{
-			lsum+=a[i];
-		}
-
-		if(gsum < lsum){
-			l=ll;
-			r=i;
-			gsum=lsum;
-		}
-
-	}
-
-	cout  << gsum << "\n";
-	cout << l << " " << r << "\n";
-
-
-
-	return 0;
+    cout << "size" << endl;
 }
