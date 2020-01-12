@@ -15,28 +15,23 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n;
+	cin >> n;
 
-	vector< pair<int,int> > v(n);
+	string s;
+	cin >> s;
 
-	int p,q;
+	int l=0,r=0;
 	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
+		if( s[i]=='L' ){
+			l++;
+		}else{
+			r++;
+		}
 	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
-	}
+	cout << (l+r+1) << "\n";
 
-	ans += (l-t)/a;
-
-	cout << ans << "\n";
 
 
 

@@ -15,28 +15,38 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n,m;
+	cin >> n >> m;
 
-	vector< pair<int,int> > v(n);
+	vector< int > graph[n+1];
+	set< pair<int,int> > check;
 
 	int p,q;
-	for(int i=0;i<n;i++){
+	for(int i=0;i<m;i++){
 		cin >> p >> q;
-		v[i] = {p,p+q};
+		check.insert( {p,q} );
+		check.insert( {q,p} );
 	}
-
 	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
+
+	for(int i=1;i<=n;i++){
+		for(int j=i+1;j<=n;j++){
+			for(int k=j+1;k<=n;k++){
+				if( check.find( {i,j} )!=check.end()
+				&& check.find( {j,k} )!=check.end()
+				&& check.find( {i,k} )!=check.end() ){
+					ans++;
+				}
+			}
+		}
 	}
 
-	ans += (l-t)/a;
+	if( (n-ans)%2==1 ){
+		ans++;
+	}
 
 	cout << ans << "\n";
+
 
 
 

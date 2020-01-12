@@ -15,28 +15,62 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n,m;
+	cin >> n >> m;
+	vector<int> a(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
 
-	vector< pair<int,int> > v(n);
+	reverse( a.begin() , a.end() );
 
 	int p,q;
-	for(int i=0;i<n;i++){
+	vector< unordered_set<int> > graph(n+1);
+	for(int i=0;i<m;i++){
 		cin >> p >> q;
-		v[i] = {p,p+q};
+		graph[p].insert(q);
+		graph[q].insert(p);
 	}
 
+	int t=0;
 	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
-	}
 
-	ans += (l-t)/a;
+	// while(t<n &&  graph[a[0]].find( a[t] )!=graph[a[0]].end() ){
+	// 	ans++;
+	// 	t++;
+	// }
+
+	// if(t>=n){
+	// 	cout << ans << "\n";
+	// 	return 0;
+	// }
+
+	//cout << ans << "\n";
+	unordered_set<int> s1,s2;
+	for(auto i : graph[ a[t] ]){
+		s1.insert(i);
+	}
+	t++;
+
+	for(int i=t;i<n;i++){
+		if( s1.find( a[i] )!=s1.end() ){
+			ans++;
+		}
+			s2.clear();
+			for(auto j : graph[a[i]]){
+				if( s1.find( j )!=s1.end() ){
+					s2.insert(j);
+				}
+			}
+			s1=s2;
+		
+	}
 
 	cout << ans << "\n";
+
+
+
+
 
 
 

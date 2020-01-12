@@ -15,28 +15,58 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n,a,b,k;
+	cin >> n >> a  >> b >> k;
+	string s;
+	cin >> s;
 
-	vector< pair<int,int> > v(n);
+	s=" "+s;
+	vector<int> dp(n+1,0);
 
-	int p,q;
-	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
+	
+
+	vector< pair<int,int> > ans(n+1);
+	int pos=-1;
+	for(int i=1;i<=n;i++){
+		if( s[i]=='0' ){
+			pos++;
+			ans[pos]={i,0};
+			for(;i<=n;i++){
+				if( s[i]=='0' ){
+					ans[pos]={ ans[pos].first , ans[pos].second+1 };
+				}else{
+					break;
+				}
+			}
+		}
+	}
+	deque<int> fa;
+
+	for(int i=0;i<=pos;i++){
+//		cout << ans[i].first << " " << ans[i].second << "\n";
+		for(int j=ans[i].first+b-1;j<ans[i].first+ans[i].second;j+=b){
+			fa.push_back(j);
+		}
 	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
+	for(int i=0;i<a-1;i++){
+		fa.pop_front();
 	}
 
-	ans += (l-t)/a;
+	cout << fa.size() << "\n";
+	for(int i=0;i<fa.size();i++){
+		cout << fa[i] << " ";
+	}
+	cout << "\n";
 
-	cout << ans << "\n";
+
+
+
+
+
+
+
+
 
 
 

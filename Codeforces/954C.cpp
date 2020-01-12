@@ -12,31 +12,60 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
+bool check( int a, int b, int l ){
+	int x1 = a%l,y1 = a/l;
+	int x2 = b%l,y2 = b/l;
+
+	int dis = abs( x1-x2 ) + abs( y1-y2 );
+
+	if( dis==1 )
+		return true;
+	return false;
+
+}
+
+
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n;
+	cin >> n;
 
-	vector< pair<int,int> > v(n);
-
-	int p,q;
+	vector<int> a(n);
 	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
+		cin >> a[i];
+		a[i]--;
 	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
+	int l=1,dis;
+	for(int i=1;i<n;i++){
+
+
+		dis = abs( a[i] - a[i-1] );
+		if( dis==0 ){
+			cout << "NO" << "\n";
+			return 0;
+		}
+		if( dis!=1 ){
+			if( l==-1 ){
+				l=dis;
+			}else if(l!=dis){
+				cout << "NO" << "\n";
+				return 0;
+			}
+		}
 	}
 
-	ans += (l-t)/a;
 
-	cout << ans << "\n";
+	for(int i=1;i<n;i++){
+		if( check( a[i-1] , a[i], l ) ==false){
+			cout << "NO" << "\n";
+			return 0;
+		}
+	}
+
+	cout << "YES" << "\n";
+	cout << 1000000000 << " " << l << "\n";
 
 
 

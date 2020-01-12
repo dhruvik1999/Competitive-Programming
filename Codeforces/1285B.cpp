@@ -12,35 +12,64 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
+int solve(vector<int> &a,int n){
+
+	int ls=INT_MIN,gs1=INT_MIN,gs2=INT_MIN;
+
+	for(int i=0;i<n-1;i++){
+		ls = max( a[i] , ls+a[i] );
+		gs1 = max( ls , gs1 );
+	}
+
+	ls = INT_MIN;
+
+	for(int i=1;i<n;i++){
+		ls = max( a[i] , ls+a[i] );
+		gs2 = max( ls , gs2 );
+	}
+
+	return max( gs1,gs2 );
+
+
+
+
+
+}
+
 int32_t main(){
-	fastio();
+    fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+    int t;
+    cin >> t;
 
-	vector< pair<int,int> > v(n);
+    while(t--){
+    	int n;
+    	cin  >> n;
 
-	int p,q;
-	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
-	}
+    	int s1=0,s2=0;
+    	vector<int> a(n);
+    	for(int i=0;i<n;i++){
+    		cin >> a[i];
+    		s1+=a[i];
+    	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
-	}
+    	s2 = solve( a , n );
 
-	ans += (l-t)/a;
-
-	cout << ans << "\n";
-
+    	if( s1 > s2 ){
+    		cout << "YES" << "\n";
+    	}else{
+    		cout << "NO" <<"\n";
+    	}
 
 
-	return 0;
+
+
+
+    }
+
+
+
+    return 0;
 }
 
 

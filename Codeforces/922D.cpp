@@ -12,31 +12,64 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
+bool comparator(string a,string b){
+	
+	string ans1=a+b,ans2=b+a;
+	int n = ans1.length();
+
+	int s1=0,s2=0,c1=0,c2=0;
+	for(int i=0;i<n;i++){
+		if( ans1[i]=='s' ){
+			s1++;
+		}else{
+			c1+=s1;
+		}
+	}
+
+	for(int i=0;i<n;i++){
+		if( ans2[i]=='s' ){
+			s2++;
+		}else{
+			c2+=s2;
+		}
+	}
+
+	if( c1>c2 ){
+		return true;
+	}
+	return false;
+
+}
+
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n;
+	cin >> n;
 
-	vector< pair<int,int> > v(n);
-
-	int p,q;
+	vector<string> a(n);
 	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
+		cin >> a[i];
 	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
-	}
+	sort( a.begin() , a.end() , comparator );
 
-	ans += (l-t)/a;
+	int ans = 0,s=0;
+
+	for(int i=0;i<n;i++){
+		for(int j=0;j<a[i].size();j++){
+			if( a[i][j] == 's' ){
+				s++;
+			}else{
+				ans+=s;
+			}
+		}
+	}
 
 	cout << ans << "\n";
+
+
+
 
 
 

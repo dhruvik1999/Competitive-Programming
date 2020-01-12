@@ -15,28 +15,43 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
-	int n,l,a;
-	cin >> n >> l >> a;
+	int n,m,k;
+	cin >> n >> m >> k;
 
-	vector< pair<int,int> > v(n);
+	vector<int> a(n),b(m),c;
+	unordered_map< int,int > mp;
 
-	int p,q;
 	for(int i=0;i<n;i++){
-		cin >> p >> q;
-		v[i] = {p,p+q};
+		cin >> a[i];
+		c.push_back(a[i]);
+		mp[ a[i] ]++;
 	}
 
-	int ans = 0;
-	int t = 0;
-	sort(v.begin(),v.end());
-	for(int i=0;i<n;i++){
-		ans+= ( v[i].first-t )/a;
-		t=v[i].second;
+	for(int i=0;i<m;i++){
+		cin >> b[i];
+		c.push_back(b[i]);
+		mp[ b[i] ]--;
 	}
 
-	ans += (l-t)/a;
+	sort( c.begin() , c.end() );
+	//unique( c.erase( c.begin() , c.end() ) , c.end() );
+	c.erase( unique( c.begin() , c.end() ) , c.end() );
+	reverse( c.begin() , c.end() );
 
-	cout << ans << "\n";
+	int ls = 0;
+	for(int i=0;i<c.size();i++){
+		ls += mp[ c[i] ];  
+		//cout << c[i]  << " " << mp[c[i]] << "\n";
+		if( ls>0 ){
+			cout << "YES" << "\n";
+			return 0;
+		}
+	}
+
+	cout << "NO" << "\n";
+
+
+
 
 
 
