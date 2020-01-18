@@ -18,6 +18,45 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
+	int a,b;
+	cin >> a >> b;
+
+	int t = min( a, b );
+	b = max( a,b );
+	a = t;
+
+	vector< int > fact;
+	for(int i=1;i<=sqrt(a);i++){
+		if( a%i==0 && b%i==0 ){
+			fact.push_back(i);
+		}
+		if( a%( a/i ) ==0 && b%(a/i)==0 ){
+			fact.push_back(a/i);
+		}
+	}
+
+	sort( fact.begin() , fact.end() );
+	fact.erase( unique( fact.begin() , fact.end() ) , fact.end() );
+
+	int n;
+	cin >> n;
+	int l,r,check;
+
+	// for(int i=0;i<fact.size();i++){
+	// 	cout << fact[i] << " ";
+	// }
+	// cout  << "\n";
+
+	for(int i=0;i<n;i++){
+		cin >> l >> r;
+		check = *(upper_bound( fact.begin() , fact.end() , r )-1);
+		//cout << r << " --> " << check << "\n";
+		if( l<= check  ){
+			cout << check << "\n";
+		}else{
+			cout << -1 << "\n";
+		}
+	}
 
 
 

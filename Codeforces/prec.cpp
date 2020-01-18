@@ -14,9 +14,14 @@ int main()
 {
     vector<int> a(5);
 
-    for(int i=0;i<5;i++){
-        a.push_back(i+10);
-    }
+    a.push_back(1);
+    a.push_back(3);
+    a.push_back(5);
+    a.push_back(5);
+    a.push_back(5);
+    
+    a.push_back(9);
 
-    cout << *lower_bound( a.begin() , a.end() , 2  ) << "\n";    
+
+    cout << *(upper_bound( a.begin() , a.end() , 5  )-1) << "\n";    
 }
