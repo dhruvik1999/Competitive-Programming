@@ -18,6 +18,30 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
+	int n;
+	cin >> n;
+
+	vector<int> a(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+
+	sort( a.begin() , a.end() );
+
+	int x=0,y=0;
+
+	for(int i=0;i<n;i++){
+		if( i<n/2 ){
+			x+=a[i];
+		}else{
+			y+=a[i];
+		}
+	}
+
+//	cout << x << " " << y  << "\n";
+
+	cout << x*x+y*y << "\n";
+
 
 
 

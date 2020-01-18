@@ -18,7 +18,45 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 
+	int t;
+	cin  >> t;
 
+	while(t--){
+		int n;
+		cin >> n;
+
+		vector<int> a(n);
+		for(int i=0;i<n;i++){
+			cin >> a[i];
+		}
+
+		int m;
+		cin >> m;
+		int tt;
+		int odd=0,even=0;
+		for(int i=0;i<m;i++){
+			cin >> tt;
+			if( tt%2==0 ){
+				even++;
+			}else{
+				odd++;
+			}
+		}
+
+		int ans = 0;
+		for(int i=0;i<n;i++){
+			if( a[i]%2==0 ){
+				ans+=even;
+			}else{
+				ans+=odd;
+			}
+		}
+
+		cout << ans << "\n";
+
+
+
+			}
 
 
 	return 0;
