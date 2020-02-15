@@ -38,7 +38,7 @@ int32_t main(){
 		}
 		ls = n;
 		for(int j=0;j<n;j++){
-			if( a[j][i]%m == i ){
+			if( a[j][i]%m == i && a[j][i] < n*m ){
 				if( a[j][i]/m <= j ){
 					dp[ j-a[j][i]/m ]++;
 				}else{

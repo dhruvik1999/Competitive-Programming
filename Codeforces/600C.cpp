@@ -18,6 +18,43 @@ void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 int32_t main(){
 	fastio();
 	
+	string s;
+	cin >> s;
+
+	int n = s.length();
+	vector<int> frq(26,0);
+	string uw = "";
+
+	for(int i=0;i<n;i++){
+		frq[ s[i]-'a' ]++;
+	}
+	string l="",m="",r="";
+
+
+	for(int i=0;i<26;i++){
+		if( frq[i]%2!=0 ){
+			uw+=(char)('a'+i);
+		}
+			for(int j=0;j<frq[i]/2;j++){
+				l+=(char)('a'+i);
+			}
+		
+	}
+
+	//cout << uw << "\n";
+
+	sort( uw.begin() , uw.end() );
+
+	if(n%2==1){
+		m=uw[uw.length()/2];
+	}
+	for(int i=0;i<uw.length()/2;i++){
+		l+=uw[i];
+	}
+	sort(l.begin(),l.end());
+	r=l;
+	reverse(r.begin(),r.end());
+	cout << l+m+r << "\n";
 
 	return 0;
 }
