@@ -48,34 +48,49 @@ int32_t main(){
 
 	while(p<n && q<m){
 		if( a[p] == b[q] ){
-			p++;
-			q++;
 			a1.push_back(a[p]);
 			a2.push_back(b[q]);
+
+			//cout << a[p] << " " << b[q] << "\n";
+			p++;
+			q++;
 		}else{
 			s1=a[p];
 			s2=b[q];
 			while( p<n && q<m && s1 != s2 ){
+			//cout << s1 <<" " << s2 << "\n";
+
 				if(s1<s2){
 					p++;
 					if(p<n)
 						s1+=a[p];
 				}else{
+					//cout << "*" << "\n";
 					q++;
 					if(q<m)
 						s2+=b[q];
 				}
+				//cout << s1 << " " << s2 << "\n";
 			}
 
 			if(s1!=s2){
 				cout << -1 << "\n";
-				return;
+				return 0;
 			}else{
 				a1.push_back(s1);
 				a2.push_back(s2);
+				//cout << s1 << " " << s2 << "\n";
+				p++;
+				q++;
 			}
 		}
 	}
+
+	// for(auto i : a2){
+	// 	cout << i << "\n";
+	// }
+
+
 
 	for(int i=0;i<a1.size();i++){
 		sum-=a1[i];
