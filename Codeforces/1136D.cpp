@@ -28,22 +28,22 @@ int32_t main(){
 	vector< unordered_set<int> > graph(n+1);
 	for(int i=0;i<m;i++){
 		cin >> p >> q;
-		graph[p].insert(q);
+		//graph[p].insert(q);
 		graph[q].insert(p);
 	}
 
-	int t=0;
+	int t=1;
 	int ans = 0;
 
-	// while(t<n &&  graph[a[0]].find( a[t] )!=graph[a[0]].end() ){
-	// 	ans++;
-	// 	t++;
-	// }
+	while(t<n &&  graph[a[0]].find( a[t] )!=graph[a[0]].end() ){
+		ans++;
+		t++;
+	}
 
-	// if(t>=n){
-	// 	cout << ans << "\n";
-	// 	return 0;
-	// }
+	if(t>=n){
+		cout << ans << "\n";
+		return 0;
+	}
 
 	//cout << ans << "\n";
 	unordered_set<int> s1,s2;
@@ -53,9 +53,10 @@ int32_t main(){
 	t++;
 
 	for(int i=t;i<n;i++){
-		if( s1.find( a[i] )!=s1.end() ){
+		if( graph[ a[0] ].find( a[i] )!=graph[ a[0] ].end() && s1.find( a[i] )!=s1.end() ){
 			ans++;
-		}
+		}else{
+
 			s2.clear();
 			for(auto j : graph[a[i]]){
 				if( s1.find( j )!=s1.end() ){
@@ -63,7 +64,7 @@ int32_t main(){
 				}
 			}
 			s1=s2;
-		
+		}
 	}
 
 	cout << ans << "\n";
@@ -79,4 +80,4 @@ int32_t main(){
 
 
 
-
+ 
