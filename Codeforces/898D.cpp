@@ -13,61 +13,53 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
-vector<int> dp(1000005);
-
-string solve( string a, string b ){
-	
-	return a;
-
-}
 
 
 int32_t main(){
-
 	fastio();
-	int n;
-	cin >> n;
 
+	int n,m,k;
+	cin >> n >> m >> k;
 
-	vector<string> a(n);
+	vector<int> dp(1000005,0);
+	int t;
 	for(int i=0;i<n;i++){
-		cin >> a[i];
+		cin >> t;
+		dp[t]=1;
 	}
 
-	string ans = a[0];
-	int nn,mm,val,val2,mnp;
+	deque<int> dq;
+	int ans = 0;
 
-	for(int i=1;i<n;i++){
-	//	ans = solve( ans , a[i] );
+	for(int i=1;i<=1000000;i++){
+		if(dp[i]==1){
+			if( dq.size()==0 || i <=  dq[0]+m-1 ){
+				dq.push_back(i);
 
+				if(dq.size()==k){
+					dq.pop_back();
+					ans++;
+				}
 
+			}else{
 
-	nn = ans.size();
-	mm = a[i].size();
-	
-	//cout << "*" << "\n";
-	// dp.push_back(-1);
+				while( dq.size()!=0 && i >  dq[0]+m-1){
+					dq.pop_front();
+				}
 
-	val = 0,val2=0;
-	mnp=0;
+				dq.push_back(i);
 
-	for(int j=nn-1;j>=max(0LL,nn-mm);j--){
-		val = ((101*val%MOD)%MOD+(ans[j]-'!')%MOD)%MOD;
-		val2 = (val2%MOD + ((a[i][nn-1-j]-'!')%MOD*powerr(101,nn-1-j,MOD)%MOD)%MOD)%MOD;
+				if(dq.size()==k){
+					dq.pop_back();
+					ans++;
+				}
 
-		if(val==val2){
-			mnp=nn-j;
+			}
 		}
-
-	}
-
-	for(int j=mnp;j<mm;j++){
-		string ss(1, a[i][j]); 
-		ans.append(ss);
-	}
 	}
 
 	cout << ans << "\n";
+
 	
 	return 0;
 }
