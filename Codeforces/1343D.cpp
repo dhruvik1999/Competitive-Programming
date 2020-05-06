@@ -13,58 +13,43 @@ vector<int> fact(int n){vector<int> ans;for(int i=1;i<=sqrt(n);i++){if(n%i==0){i
 int powerr(int base,int exp,int mod) { if(exp==0)return 1;int t = powerr(base,exp/2,mod)%mod;if(exp%2==0){return (t%mod*t%mod)%mod;}else{return (t%mod*t%mod*base%mod)%mod;}} 
 void fastio(){ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);}
 
-void dfs(vector<int> *p, vector<int> *q, vector<bool> &visp,vector<bool> &visq, string type,int node){
-	if(type=="p"){
-		visp[node]=true;
-		for(int i=0;i<p[node].size();i++){
-			if( visq[ p[node][i] ]==false ){
-				dfs(p,q,visp,visq,"q",p[node][i]);
-			}
-		}
-	}else{
-		visq[node]=true;
-		for(int i=0;i<q[node].size();i++){
-			if( visp[ q[node][i] ]==false ){
-				dfs(p,q,visp,visq,"p",q[node][i]);
-			}
-		}
+
+void solve(){
+	int n,k;
+	cin >> n >> k;
+
+	vector<int> a(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i];
 	}
+
+	vector<int> cnt(2*k+10,0), fx(2*k+10,0);
+	for(int i=0;i<n/2;i++){
+		cnt[ a[i]+a[n-i-1] ]++;
+		fx[ min(a[i],a[n-i-1])+1 ]++;
+		fx[ max(a[i],a[n-i-1])+k+1 ]--;
+	}
+
+	int ans = n;
+	for(int i=2;i<=2*k;i++){
+		fx[i]+=fx[i-1];
+		ans = min( ans , fx[i]-cnt[i] + (n/2-fx[i])*2 );
+	}
+	cout << ans << "\n";
+
 }
+
 
 
 int32_t main(){
 	fastio();
 
-	int n;
-	cin >> n;
+	int t;
+	cin >> t;
 
-	vector<string> a(n);
-	for(int i=0;i<n;i++){
-		cin >> a[i];
+	while(t--){
+		solve();
 	}
-
-	vector< int > p[26];
-	vector< int > q[n];
-
-	for(int i=0;i<n;i++){
-		for(int j=0;j<a[i].size();j++){
-			p[ (a[i][j]-'a') ].push_back(i);
-			q[i].push_back( (a[i][j]-'a') );
-		}
-	}
-
-	int ans = 0;
-	vector<bool> visp(n,false), visq(n,false);
-
-	for(int i=0;i<n;i++){
-		if(visq[i]==false){
-			ans++;
-			dfs(p,q,visp,visq,"q",i);
-		}
-	}
-
-	cout << ans << "\n";
-
 
 
 	return 0;
